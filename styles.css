@@ -17,7 +17,7 @@
 
 }
 
-.playbox{
+.opponentBox{
     text-align: center;
 }
 
@@ -30,6 +30,22 @@
 }
 
 #scissors{
+    display: none;
+}
+
+.playerBox{
+    text-align: center;
+}
+
+#playerRock{
+    display: none;
+}
+
+#playerPaper{
+    display: none;
+}
+
+#playerScissors{
     display: none;
 }
 

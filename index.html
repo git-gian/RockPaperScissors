@@ -20,16 +20,21 @@
         </div>
 
         <div class='button'>
-            <img id='buttonimage' src="images/playnow.png" alt="the play button" onclick="play()">
+            <img id='buttonimage' src="images/playnow.png" alt="the play button" onclick="clearBoard();setBoard()">
         </div>
 
-        <div class='playbox'>
+        <div class='opponentBox'>
             <img id='rock' src="images/rock.png">
             <img id='paper' src="images/paper.png">
             <img id='scissors' src="images/scissors.png">
             <h1 id='countdown'></h1>
-            <img id='playagain' src="images/playagain.png" onclick="play()">
+            <img id='playagain' src="images/playagain.png" onclick="clearBoard();setBoard()">
+        </div>
 
+        <div class='playerBox'>
+            <img id='playerRock' src="images/rock.png" onclick="play()">
+            <img id='playerPaper' src="images/paper.png" onclick="play()">
+            <img id='playerScissors' src="images/scissors.png" onclick="play()">
         </div>
 
     </div>
@@ -37,12 +42,14 @@
 
 <script lang="javascript">
 
+    var oppScore = 0;
+    var playerScore = 0;
+
     function play(){
         var timer = 4;
         var countdown = document.getElementById("countdown");
-        var opponent;
-
-        clearBoard();
+        var opponent; //the opponent's option
+        var player; //the player's option
 
         var counter = setInterval(function count(){
 
@@ -52,15 +59,7 @@
         
                 opponent = getRandomIntInclusive(1,3);
 
-                if (opponent === 1){
-                    document.getElementById("rock").style.display = "inline";
-                }
-                else if (opponent === 2){
-                    document.getElementById("paper").style.display = "inline";
-                }
-                else if (opponent === 3){
-                    document.getElementById("scissors").style.display = "inline";
-                }
+                calculateScore(opponent, player);
 
                 document.getElementById("playagain").style.display = "inline";
             }
@@ -69,6 +68,34 @@
                 countdown.innerHTML = "" + (timer) + "";
             }
         }, 1000)
+    }
+
+    function calculateScore(opponent, player){
+
+        if (opponent === 1){
+            document.getElementById("rock").style.display = "inline";
+        }
+        else if (opponent === 2){
+            document.getElementById("paper").style.display = "inline";
+        }
+        else if (opponent === 3){
+            document.getElementById("scissors").style.display = "inline";
+        }
+
+        if (opponent > player){
+
+            oppScore++;
+        }
+        else if (player > opponent){
+
+            playerScore++;
+        }
+    }
+
+    function setBoard(){
+        document.getElementById("playerRock").style.display = "inline";
+        document.getElementById("playerPaper").style.display = "inline";
+        document.getElementById("playerScissors").style.display = "inline";
     }
 
     function clearBoard(){
