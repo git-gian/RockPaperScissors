@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<html>
+
+<body style="background-color: #92A8D1;">
+
+    <div class='container'>
+
+        <div class='title'>
+            <h1>Rock, Paper, Scissors</h1>
+        </div>
+
+        <div class='instructions'>
+            <h3>How to Play</h3>
+            <p>Think of what you're gonna play: rock, paper, or scissors. Whenever you're ready, hit the button and the
+                countdown will begin</p>
+        </div>
+
+        <div class='button'>
+            <img id='buttonimage' src="images/playnow.png" alt="the play button" onclick="play()">
+        </div>
+
+        <div class='playbox'>
+            <img id='rock' src="images/rock.png">
+            <img id='paper' src="images/paper.png">
+            <img id='scissors' src="images/scissors.png">
+            <h1 id='countdown'></h1>
+            <img id='playagain' src="images/playagain.png" onclick="play()">
+
+        </div>
+
+    </div>
+</body>
+
+<script lang="javascript">
+
+    function play(){
+        var timer = 4;
+        var countdown = document.getElementById("countdown");
+        var opponent;
+
+        clearBoard();
+
+        var counter = setInterval(function count(){
+
+            if (timer === 1){
+                countdown.innerHTML = "";
+                clearInterval(counter);
+        
+                opponent = getRandomIntInclusive(1,3);
+
+                if (opponent === 1){
+                    document.getElementById("rock").style.display = "inline";
+                }
+                else if (opponent === 2){
+                    document.getElementById("paper").style.display = "inline";
+                }
+                else if (opponent === 3){
+                    document.getElementById("scissors").style.display = "inline";
+                }
+
+                document.getElementById("playagain").style.display = "inline";
+            }
+            else{
+                timer = timer-1;
+                countdown.innerHTML = "" + (timer) + "";
+            }
+        }, 1000)
+    }
+
+    function clearBoard(){
+        document.getElementById("buttonimage").style.display = "none";
+        document.getElementById("rock").style.display = "none";
+        document.getElementById("paper").style.display = "none";
+        document.getElementById("scissors").style.display = "none";
+        document.getElementById("playagain").style.display = "none";
+    }
+
+    function getRandomIntInclusive(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+    }
+
+</script>
+
+</html>

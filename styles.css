@@ -1,0 +1,38 @@
+.title{
+    text-align: center;
+    margin-top: 50px;
+}
+
+.instructions{
+    text-align: center;
+    
+}
+
+#buttonimage{
+    width: 500px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 75px;
+
+}
+
+.playbox{
+    text-align: center;
+}
+
+#rock{
+    display: none;
+}
+
+#paper{
+    display: none;
+}
+
+#scissors{
+    display: none;
+}
+
+#playagain{
+    display:none;
+}
