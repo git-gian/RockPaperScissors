@@ -28,14 +28,21 @@
             <img id='paper' src="images/paper.png">
             <img id='scissors' src="images/scissors.png">
             <h1 id='countdown'></h1>
-            <img id='playagain' src="images/playagain.png" onclick="clearBoard();setBoard()">
         </div>
 
         <div class='playerBox'>
-            <img id='playerRock' src="images/rock.png" onclick="play()">
-            <img id='playerPaper' src="images/paper.png" onclick="play()">
-            <img id='playerScissors' src="images/scissors.png" onclick="play()">
+            <img id='playerRock' src="images/rock.png" onclick="setPlayerOption(this.id);play()">
+            <img id='playerPaper' src="images/paper.png" onclick="setPlayerOption(this.id);play()">
+            <img id='playerScissors' src="images/scissors.png" onclick="setPlayerOption(this.id);play()">
         </div>
+
+        <div class='scores'>
+            <img id='playagain' src="images/playagain.png" onclick="clearBoard();setBoard()">
+            <h1 id='scorePlayer'></h1>
+            <h1 id='scoreOpponent'></h1>
+        </div>
+
+
 
     </div>
 </body>
@@ -44,26 +51,33 @@
 
     var oppScore = 0;
     var playerScore = 0;
+    var opponent; //the opponent's option
+    var player; //the player's option
 
     function play(){
+
         var timer = 4;
         var countdown = document.getElementById("countdown");
-        var opponent; //the opponent's option
-        var player; //the player's option
+
+        document.getElementById("playagain").style.display = "none";
 
         var counter = setInterval(function count(){
 
             if (timer === 1){
+
                 countdown.innerHTML = "";
                 clearInterval(counter);
         
                 opponent = getRandomIntInclusive(1,3);
 
                 calculateScore(opponent, player);
+                showScore();
 
                 document.getElementById("playagain").style.display = "inline";
+            
             }
             else{
+
                 timer = timer-1;
                 countdown.innerHTML = "" + (timer) + "";
             }
@@ -82,7 +96,15 @@
             document.getElementById("scissors").style.display = "inline";
         }
 
-        if (opponent > player){
+        if (opponent === 3 && player === 1){
+
+            playerScore++;
+        }
+        else if (opponent === 1 && player === 3){
+
+            oppScore++;
+        }
+        else if (opponent > player){
 
             oppScore++;
         }
@@ -90,20 +112,56 @@
 
             playerScore++;
         }
+
+        document.getElementById("scorePlayer").innerHTML = "Player: " + playerScore;
+        document.getElementById("scoreOpponent").innerHTML = "Opponent: " + oppScore;
     }
 
+    //brings the player options to visible state
     function setBoard(){
         document.getElementById("playerRock").style.display = "inline";
         document.getElementById("playerPaper").style.display = "inline";
         document.getElementById("playerScissors").style.display = "inline";
     }
 
+    //clears the playbox (opponent's option and play button)
     function clearBoard(){
         document.getElementById("buttonimage").style.display = "none";
         document.getElementById("rock").style.display = "none";
         document.getElementById("paper").style.display = "none";
         document.getElementById("scissors").style.display = "none";
-        document.getElementById("playagain").style.display = "none";
+    }
+
+    //gives the player a value for comparison later on and hides other options that were not chosen
+    function setPlayerOption(playerOptionID){
+        
+       if (playerOptionID === "playerRock"){
+
+            player = 1; //set player option to 1 (rock)
+
+            document.getElementById("playerPaper").style.display = "none";
+            document.getElementById("playerScissors").style.display = "none";
+       }
+       else if (playerOptionID === "playerPaper"){
+
+            player = 2; //set player option to 2 (paper)
+
+            document.getElementById("playerRock").style.display = "none";
+            document.getElementById("playerScissors").style.display = "none";
+       }
+       else if (playerOptionID === "playerScissors"){
+
+            player = 3; //set player option to 3 (scissors)
+
+            document.getElementById("playerRock").style.display = "none";
+            document.getElementById("playerPaper").style.display = "none";
+        }
+    }
+
+    function showScore(){
+
+        document.getElementById("scorePlayer").style.display = "inline";
+        document.getElementById("scoreOpponent").style.display = "inline";
     }
 
     function getRandomIntInclusive(min, max) {
