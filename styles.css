@@ -1,3 +1,18 @@
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+  
+.column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+}
+
 .title{
     text-align: center;
     margin-top: 50px;
@@ -15,6 +30,14 @@
     margin-right: auto;
     margin-top: 75px;
 
+}
+
+.playerSide{
+    text-align: center;
+}
+
+.opponentSide{
+    text-align: center;
 }
 
 .opponentBox{
@@ -49,16 +72,32 @@
     display: none;
 }
 
+.replay{
+    text-align: center;
+}
+
 #playagain{
     display:none;
 }
 
 #scorePlayer{
     display: none;
-    text-align: center;
 }
 
 #scoreOpponent{
     display: none;
-    text-align: center;
+}
+
+#playerPickRock, #playerPickPaper, #playerPickScissors{
+    position: absolute;
+    display: none;
+    left: 0px;
+    float: left;
+}
+
+#opponentPickRock, #opponentPickPaper, #opponentPickScissors{
+    position: absolute;
+    display: none;
+    right: 0px;
+    float: right;
 }

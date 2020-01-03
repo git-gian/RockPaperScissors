@@ -9,41 +9,95 @@
 
     <div class='container'>
 
-        <div class='title'>
-            <h1>Rock, Paper, Scissors</h1>
+        <div class='row'>
+            <div class='column'>
+                <div class='playerPicks'>
+                    <h1 id='playerPickRock'></h1>
+                    <br>
+                    <br>
+                    <h1 id='playerPickPaper'></h1>
+                    <br>
+                    <br>
+                    <h1 id='playerPickScissors'></h1>
+                </div>
+            </div>
+            <div class='column'>
+                <div class='title'>
+                    <h1>Rock, Paper, Scissors</h1>
+                </div>
+            </div>
+            <div class='column'>
+                <div class='opponentPicks'>
+                    <h1 id='opponentPickRock'></h1>
+                    <br>
+                    <br>
+                    <h1 id='opponentPickPaper'></h1>
+                    <br>
+                    <br>
+                    <h1 id='opponentPickScissors'></h1>
+                </div>
+            </div>
         </div>
 
-        <div class='instructions'>
-            <h3>How to Play</h3>
-            <p>Think of what you're gonna play: rock, paper, or scissors. Whenever you're ready, hit the button and the
-                countdown will begin</p>
+        <div class='row'>
+            <div class='column'>
+                <div class='instructions'>
+                    <h3>How to Play</h3>
+                    <p>Think of what you're gonna play: rock, paper, or scissors. Whenever you're ready, hit the button and the
+                    countdown will begin</p>
+
+                    <h1 id='countdown'></h1>
+                </div>
+            </div>
         </div>
 
-        <div class='button'>
-            <img id='buttonimage' src="images/playnow.png" alt="the play button" onclick="clearBoard();setBoard()">
+        <div class='row'>
+            <div class='column'>
+                <div class='playerSide'>
+                    <h1 id='scorePlayer'></h1>
+                </div>
+            </div>
+
+            <div class='column'>
+                <div class='opponentBox'>
+                    <img id='rock' src="images/rock.png">
+                    <img id='paper' src="images/paper.png">
+                    <img id='scissors' src="images/scissors.png">
+                </div>
+            </div>
+
+            <div class='column'>
+                <div class='opponentSide'>
+                    <h1 id='scoreOpponent'></h1>
+                </div>
+            </div>
         </div>
 
-        <div class='opponentBox'>
-            <img id='rock' src="images/rock.png">
-            <img id='paper' src="images/paper.png">
-            <img id='scissors' src="images/scissors.png">
-            <h1 id='countdown'></h1>
+        <div class='row'>
+            <div class='column'>
+                <div class='button'>
+                    <img id='buttonimage' src="images/playnow.png" alt="the play button" onclick="clearBoard();setBoard()">
+                </div>
+            </div>
         </div>
 
-        <div class='playerBox'>
-            <img id='playerRock' src="images/rock.png" onclick="setPlayerOption(this.id);play()">
-            <img id='playerPaper' src="images/paper.png" onclick="setPlayerOption(this.id);play()">
-            <img id='playerScissors' src="images/scissors.png" onclick="setPlayerOption(this.id);play()">
+        <div class='row'>
+            <div class='column'>
+                <div class='playerBox'>
+                    <img id='playerRock' src="images/rock.png" onclick="setPlayerOption(this.id);play()">
+                    <img id='playerPaper' src="images/paper.png" onclick="setPlayerOption(this.id);play()">
+                    <img id='playerScissors' src="images/scissors.png" onclick="setPlayerOption(this.id);play()">
+                </div>
+            </div>
         </div>
 
-        <div class='scores'>
-            <img id='playagain' src="images/playagain.png" onclick="clearBoard();setBoard()">
-            <h1 id='scorePlayer'></h1>
-            <h1 id='scoreOpponent'></h1>
+        <div class='row'>
+            <div class='column'>
+                <div class='replay'>
+                    <img id='playagain' src="images/playagain.png" onclick="clearBoard();setBoard()">
+                </div>
+            </div>
         </div>
-
-
-
     </div>
 </body>
 
@@ -53,6 +107,12 @@
     var playerScore = 0;
     var opponent; //the opponent's option
     var player; //the player's option
+    var oppPickRock = 0;
+    var oppPickPaper = 0;
+    var oppPickScissors = 0;
+    var playerPickRock = 0;
+    var playerPickPaper = 0;
+    var playerPickScissors = 0;
 
     function play(){
 
@@ -72,9 +132,9 @@
 
                 calculateScore(opponent, player);
                 showScore();
+                showPicks();
 
                 document.getElementById("playagain").style.display = "inline";
-            
             }
             else{
 
@@ -87,14 +147,19 @@
     function calculateScore(opponent, player){
 
         if (opponent === 1){
-            document.getElementById("rock").style.display = "inline";
+            document.getElementById("rock").style.display = "inline"; 
+            oppPickRock++;
         }
         else if (opponent === 2){
             document.getElementById("paper").style.display = "inline";
+            oppPickPaper++;
         }
         else if (opponent === 3){
             document.getElementById("scissors").style.display = "inline";
+            oppPickScissors++;
         }
+
+        
 
         if (opponent === 3 && player === 1){
 
@@ -138,6 +203,7 @@
        if (playerOptionID === "playerRock"){
 
             player = 1; //set player option to 1 (rock)
+            playerPickRock++;
 
             document.getElementById("playerPaper").style.display = "none";
             document.getElementById("playerScissors").style.display = "none";
@@ -145,6 +211,7 @@
        else if (playerOptionID === "playerPaper"){
 
             player = 2; //set player option to 2 (paper)
+            playerPickPaper++;
 
             document.getElementById("playerRock").style.display = "none";
             document.getElementById("playerScissors").style.display = "none";
@@ -152,6 +219,7 @@
        else if (playerOptionID === "playerScissors"){
 
             player = 3; //set player option to 3 (scissors)
+            playerPickScissors++;
 
             document.getElementById("playerRock").style.display = "none";
             document.getElementById("playerPaper").style.display = "none";
@@ -162,6 +230,25 @@
 
         document.getElementById("scorePlayer").style.display = "inline";
         document.getElementById("scoreOpponent").style.display = "inline";
+    }
+
+    function showPicks(){
+
+        document.getElementById("playerPickRock").style.display = "inline";
+        document.getElementById("playerPickPaper").style.display = "inline";
+        document.getElementById("playerPickScissors").style.display = "inline";
+
+        document.getElementById("opponentPickRock").style.display = "inline";
+        document.getElementById("opponentPickPaper").style.display = "inline";
+        document.getElementById("opponentPickScissors").style.display = "inline";
+
+        document.getElementById("playerPickRock").innerHTML = "Rock Picks: " + playerPickRock;
+        document.getElementById("playerPickPaper").innerHTML = "Paper Picks: " + playerPickPaper;
+        document.getElementById("playerPickScissors").innerHTML = "Scissors Picks: " + playerPickScissors;
+
+        document.getElementById("opponentPickRock").innerHTML = "Rock Picks: " + oppPickRock;
+        document.getElementById("opponentPickPaper").innerHTML = "Paper Picks: " + oppPickPaper;
+        document.getElementById("opponentPickScissors").innerHTML = "Scissors Picks: " + oppPickScissors;
     }
 
     function getRandomIntInclusive(min, max) {
